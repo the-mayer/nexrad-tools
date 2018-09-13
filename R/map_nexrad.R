@@ -39,14 +39,16 @@
       xy <- matrix(poly, ncol=2, byrow=TRUE)
       Polygons(list(Polygon(xy)), ID=id)}, 
     split(polys.pt, row(polys.pt)), ID),proj4string=CRS("+proj=longlat +datum=WGS84"))
+#Add the polygon attributes... they can all come along for the ride, I suppose. 
+  polys.df <- SpatialPolygonsDataFrame(Sr = polys,data = sub.data,match.ID = "ID")
+
 #Test how it looks
   plot(polys)
 #Make it pretty with ggmap
-  map<-get_map(location = KFWS,zoom = 7,maptype = "terrain")
-  p<-ggmap(map, extent = "normal", maprange = FALSE) + geom_polygon(data = fortify(polys),
-                 aes(long, lat, group = group),
-                 fill = "orange", colour = "blue", alpha = 0.2) + theme_bw()
-
+  fort.polys <- fortify(polys.df)
+  ASmap<-get_map(location = KFWS,zoom = 7,maptype = "terrain")
+  p<-ggmap(map, extent = "normal", maprange = FALSE) + geom_polygon(data = df.polys,aes(long, lat, group = group), fill = "orange", colour = "blue", alpha = 0.2,size = 0.001) + theme_bw()
+  ggsave(filename = "test.pdf",plot = p,width = 20,height = 20,units = "in",dpi = 320)
 
 
 
@@ -55,11 +57,11 @@
   #coords = data.frame(lat = nex.data$Latitude, lon = nex.data$Longitude)
   #spPoints <- SpatialPointsDataFrame(coords, data = data.frame(data = nex.data$Differential.Phase), proj4string = CRS("+proj=longlat +datum=WGS84"))
   #polys = as(SpatialPixelsDataFrame(spPoints, spPoints@data, tolerance = 0.149842),"SpatialPolygonsDataFrame")
-  spdf<-SpatialPointsDataFrame( data.frame( x = sub.data$Longitude , y = sub.data$Latitude ) , data = data.frame( z = sub.data$Reflectivity ) )
-  e<-extent(spdf)
-  ratio <- ( e@xmax - e@xmin ) / ( e@ymax - e@ymin )
-  r <- raster( nrows = 500 , ncols = floor( 500 * ratio ) , ext = extent(spdf) )
-  rf <- rasterize( spdf , r , field = "z" , fun = mean )
-  rdf <- data.frame( rasterToPoints( rf ) )  
+  #spdf<-SpatialPointsDataFrame( data.frame( x = sub.data$Longitude , y = sub.data$Latitude ) , data = data.frame( z = sub.data$Reflectivity ) )
+  #e<-extent(spdf)
+  #ratio <- ( e@xmax - e@xmin ) / ( e@ymax - e@ymin )
+  #r <- raster( nrows = 500 , ncols = floor( 500 * ratio ) , ext = extent(spdf) )
+  #rf <- rasterize( spdf , r , field = "z" , fun = mean )
+  #rdf <- data.frame( rasterToPoints( rf ) )  
   #ggplot( NULL ) + geom_raster( data = rdf , aes( x , y , fill = layer ) )
-  ggmap(map) + geom_tile( data = rdf , aes( x , y , fill = layer ),alpha = 0.5 )
+  #ggmap(map) + geom_tile( data = rdf , aes( x , y , fill = layer ),alpha = 0.5 )
