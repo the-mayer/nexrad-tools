@@ -40,15 +40,24 @@
       Polygons(list(Polygon(xy)), ID=id)}, 
     split(polys.pt, row(polys.pt)), ID),proj4string=CRS("+proj=longlat +datum=WGS84"))
 #Add the polygon attributes... they can all come along for the ride, I suppose. 
-  polys.df <- SpatialPolygonsDataFrame(Sr = polys,data = sub.data,match.ID = "ID")
+  polys.df <- SpatialPolygonsDataFrame(Sr = polys,data = sub.data,match.ID = "ID") # not really needed... fortify strips out the values. merge later when in df
 
 #Test how it looks
   plot(polys)
 #Make it pretty with ggmap
   fort.polys <- fortify(polys.df)
-  ASmap<-get_map(location = KFWS,zoom = 7,maptype = "terrain")
-  p<-ggmap(map, extent = "normal", maprange = FALSE) + geom_polygon(data = df.polys,aes(long, lat, group = group), fill = "orange", colour = "blue", alpha = 0.2,size = 0.001) + theme_bw()
-  ggsave(filename = "test.pdf",plot = p,width = 20,height = 20,units = "in",dpi = 320)
+  test<- merge(x = fort.polys,y = sub.data, by.x="id",by.y="ID",all.x=T)
+  test$Filter <- "No Filter"
+  
+  sub.test<-subset(test,Differential.Phase > 57.27+50 & Differential.Phase <= 270)
+  sub.test$Filter <- "Differential Phase Filter"
+  
+  test.3<-rbind(test,sub.test)
+  
+  map<-get_map(location = KFWS,zoom = 7,maptype = "hybrid",color = "bw")
+  p<-ggmap(map, extent = "normal", maprange = FALSE) + geom_polygon(data = test.3,aes(long, lat, group = group,fill=Reflectivity), colour = NA, alpha = 0.75) + theme_bw() + scale_fill_gradientn(colours = rev(rainbow(5)))
+  p.1 <- p + facet_wrap(~Filter,ncol=2)
+  ggsave(filename = "test3.pdf",plot = p.1,width = 11,height = 8.5,units = "in",dpi = 320)
 
 
 
