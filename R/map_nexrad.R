@@ -53,13 +53,18 @@
   sub.test$Filter <- "Differential Phase Filter"
   
   test.3<-rbind(test,sub.test)
+  #Factor Levels
+  test.3$Filter<-factor(x = test.3$Filter,levels = c("No Filter","Differential Phase Filter"))
+  
   
   map<-get_map(location = KFWS,zoom = 7,maptype = "hybrid",color = "bw")
   p<-ggmap(map, extent = "normal", maprange = FALSE) + geom_polygon(data = test.3,aes(long, lat, group = group,fill=Reflectivity), colour = NA, alpha = 0.75) + theme_bw() + scale_fill_gradientn(colours = rev(rainbow(5)))
   p.1 <- p + facet_wrap(~Filter,ncol=2)
-  ggsave(filename = "test3.pdf",plot = p.1,width = 11,height = 8.5,units = "in",dpi = 320)
+  ggsave(filename = "test3.pdf",plot = p.1,width = 12,height = 6,units = "in",dpi = 320)
 
-
+  m<-ggmap(map, extent = "normal", maprange = FALSE) + geom_polygon(data = test.3,aes(long, lat, group = group,fill=Correlation.Coefficient), colour = NA, alpha = 0.75) + theme_bw() + scale_fill_gradientn(colours = rev(terrain.colors(5)))
+  m.1 <- m + facet_wrap(~Filter,ncol=2)
+  ggsave(filename = "test.cc.pdf",plot = m.1,width = 12,height = 6,units = "in",dpi = 320)
 
 
 #Test... rasterize data, which involves some less than ideal calculations, averaging resolution cells to get a normal grid, then plot
