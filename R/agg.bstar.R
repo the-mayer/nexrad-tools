@@ -14,4 +14,7 @@
   
   Track.Count<-setNames(aggregate(sub.data$long.id ~ sub.data$GMT.Date, FUN=length),c("GMT.Date","Track.Count"))
   Avg.Speed<-setNames(aggregate(sub.data$AverageVelocity..mph ~ sub.data$GMT.Date, FUN=mean),c("GMT.Date","Avg.Velocity.MPH"))
+  Avg.Biomass<-setNames(aggregate(sub.data$AverageBiomass ~ sub.data$GMT.Date, FUN=mean),c("GMT.Date","Avg.Biomass"))
+  test.merge <- merge(Track.Count,Avg.Speed)
+  test.merge <- merge(test.merge, Avg.Biomass)  
   
