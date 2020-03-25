@@ -1,11 +1,14 @@
 #' Download NEXRAD
+#' 
+#' This function will download NEXRAD data from Amazon Web Services when a start datetime and endtime are provided.
 #'
 #' @param station_id The 4 letter NEXRAD station code
-#' @param start_datetime A character vector representing the UTC start time of the data request. Format: '%Y-%m-%d %H:%M:%S'
-#' @param end_datetime A character vector representing the UTC end time of the data request. Format: '%Y-%m-%d %H:%M:%S'
+#' @param start_datetime A character vector representing the UTC start time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'
+#' @param end_datetime A character vector representing the UTC end time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'
 #'
 #' @return A list of downloaded NEXRAD files
 #' @export
+#' 
 #' @importFrom magrittr %>% 
 #' @importFrom lubridate as_datetime date 
 #' @importFrom tibble as_tibble
@@ -17,7 +20,12 @@
 #' @importFrom stringr str_remove
 #' @importFrom here here
 #'
-
+#' @examples 
+#' \dontrun{
+#' download_nexrad(station_id = 'KFWS', 
+#'                 start_datetime = '2020-01-01 04:00:00', 
+#'                 end_datetime = '2020-01-01 05:00:00')
+#' }
 download_nexrad <- function(station_id, start_datetime, end_datetime = NULL){
   
   # Turn user input into date object

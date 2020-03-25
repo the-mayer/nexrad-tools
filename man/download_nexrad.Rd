@@ -9,13 +9,20 @@ download_nexrad(station_id, start_datetime, end_datetime = NULL)
 \arguments{
 \item{station_id}{The 4 letter NEXRAD station code}
 
-\item{start_datetime}{A character vector representing the UTC start time of the data request. Format: '%Y-%m-%d %H:%M:%S'}
+\item{start_datetime}{A character vector representing the UTC start time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'}
 
-\item{end_datetime}{A character vector representing the UTC end time of the data request. Format: '%Y-%m-%d %H:%M:%S'}
+\item{end_datetime}{A character vector representing the UTC end time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'}
 }
 \value{
 A list of downloaded NEXRAD files
 }
 \description{
-Download NEXRAD
+This function will download NEXRAD data from Amazon Web Services when a start datetime and endtime are provided.
+}
+\examples{
+\dontrun{
+download_nexrad(station_id = 'KFWS', 
+                start_datetime = '2020-01-01 04:00:00', 
+                end_datetime = '2020-01-01 05:00:00')
+}
 }
