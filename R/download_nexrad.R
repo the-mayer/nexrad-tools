@@ -1,6 +1,6 @@
 #' Download NEXRAD
 #' 
-#' This function will download NEXRAD data from Amazon Web Services when a start datetime and endtime are provided.
+#' This function will download NEXRAD data for a specific NEXRAD station from Amazon Web Services when a start datetime and endtime are provided.
 #'
 #' @param station_id The 4 letter NEXRAD station code
 #' @param start_datetime A character vector representing the UTC start time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'

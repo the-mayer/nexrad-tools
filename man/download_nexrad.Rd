@@ -17,7 +17,7 @@ download_nexrad(station_id, start_datetime, end_datetime = NULL)
 A list of downloaded NEXRAD files
 }
 \description{
-This function will download NEXRAD data from Amazon Web Services when a start datetime and endtime are provided.
+This function will download NEXRAD data for a specific NEXRAD station from Amazon Web Services when a start datetime and endtime are provided.
 }
 \examples{
 \dontrun{
