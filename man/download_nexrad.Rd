@@ -14,7 +14,7 @@ download_nexrad(station_id, start_datetime, end_datetime = NULL)
 \item{end_datetime}{A character vector representing the UTC end time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'}
 }
 \value{
-A list of downloaded NEXRAD files
+The filename and location of downloaded NEXRAD files
 }
 \description{
 This function will download NEXRAD data for a specific NEXRAD station from Amazon Web Services when a start datetime and endtime are provided.
