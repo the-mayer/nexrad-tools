@@ -1,0 +1,24 @@
+Package: nexrad.tools
+Title: NEXRAD Tools
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "David",
+           family = "Mayer",
+           role = c("aut", "cre"),
+           email = "dmayer2@gmail.com")
+Description: A collection of R functions used to download NEXRAD data from AWS, unpack, read, and generate simple plots.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports: 
+    aws.s3,
+    dplyr,
+    lubridate,
+    magrittr,
+    purrr,
+    tibble,
+    rlang,
+    stringr,
+    glue,
+    here

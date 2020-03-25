@@ -1,0 +1,11 @@
+^project\.Rproj$
+^\.Rproj\.user$
+^project\.Rcheck$
+^project.*\.tar\.gz$
+^project.*\.tgz$
+^LICENSE\.md$
+^README\.Rmd$
+nexrad.tools.Rproj
+^nexrad.tools\.Rcheck$
+^nexrad.tools.*\.tar\.gz$
+^nexrad.tools.*\.tgz$

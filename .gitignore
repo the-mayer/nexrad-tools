@@ -2,3 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+project.Rcheck/
+project*.tar.gz
+project*.tgz
+nexrad.tools.Rcheck/
+nexrad.tools*.tar.gz
+nexrad.tools*.tgz
