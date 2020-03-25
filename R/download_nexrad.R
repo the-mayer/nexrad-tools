@@ -74,6 +74,7 @@ download_nexrad <- function(station_id, start_datetime, end_datetime = NULL){
     dplyr::mutate(zip_file = stringr::str_extract(.data$filename, '.gz$')) %>% 
     dplyr::filter(!is.na(.data$zip_file))
   if(nrow(zip_data) > 0) {
-    purrr::map_chr(.x = zip_data$filename, ~ R.utils::gunzip(.x, overwrite = T) )
+    purrr::map_chr(.x = zip_data$filename, ~ R.utils::gunzip(.x, overwrite = T) ) %>% 
+      tibble::enframe(name = NULL, value = 'filename')
   } else { return(saved_data) }
 }
