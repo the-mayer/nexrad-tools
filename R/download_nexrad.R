@@ -11,14 +11,15 @@
 #' 
 #' @importFrom magrittr %>% 
 #' @importFrom lubridate as_datetime date 
-#' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble enframe
 #' @importFrom dplyr mutate filter select
-#' @importFrom purrr map
+#' @importFrom purrr map_chr
 #' @importFrom aws.s3 get_bucket_df save_object
 #' @importFrom rlang .data
 #' @importFrom glue glue
-#' @importFrom stringr str_remove
+#' @importFrom stringr str_remove str_extract
 #' @importFrom here here
+#' @importFrom R.utils gunzip
 #'
 #' @examples 
 #' \dontrun{
@@ -60,12 +61,19 @@ download_nexrad <- function(station_id, start_datetime, end_datetime = NULL){
     bucket %>% 
       dplyr::filter(.data$datetime >= start_datetime & .data$datetime <= end_datetime)
   }
-  purrr::map(.x = filtered_bucket$Key, ~ aws.s3::save_object(object = .x, 
-                                                             bucket = 'noaa-nexrad-level2', 
-                                                             key= '', 
-                                                             secret = '', 
-                                                             region = "us-east-1",
-                                                             file = here::here(glue::glue('nexrad_data/{basename(.x)}'))
-                                                             ) 
-             )
+  saved_data <- purrr::map_chr(.x = filtered_bucket$Key, ~ aws.s3::save_object(object = .x, 
+                                                                               bucket = 'noaa-nexrad-level2', 
+                                                                               key= '', 
+                                                                               secret = '', 
+                                                                               region = "us-east-1",
+                                                                               file = here::here(glue::glue('nexrad_data/{basename(.x)}'))
+                                                                               ) 
+                               ) %>% 
+    tibble::enframe(name = NULL, value = 'filename')
+  zip_data <- saved_data %>% 
+    dplyr::mutate(zip_file = stringr::str_extract(.data$filename, '.gz$')) %>% 
+    dplyr::filter(!is.na(.data$zip_file))
+  if(nrow(zip_data) > 0) {
+    purrr::map_chr(.x = zip_data$filename, ~ R.utils::gunzip(.x, overwrite = T) )
+  } else { return(saved_data) }
 }
