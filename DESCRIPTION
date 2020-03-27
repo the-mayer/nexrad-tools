@@ -23,3 +23,4 @@ Imports:
     glue,
     here,
     R.utils
+Depends: rJava (>= 0.5-0)
