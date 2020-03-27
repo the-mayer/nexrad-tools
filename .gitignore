@@ -8,3 +8,4 @@ project*.tgz
 nexrad.tools.Rcheck/
 nexrad.tools*.tar.gz
 nexrad.tools*.tgz
+nexrad_data/*
