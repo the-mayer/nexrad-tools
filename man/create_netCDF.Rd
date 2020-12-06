@@ -2,18 +2,18 @@
 % Please edit documentation in R/create_netCDF.R
 \name{create_netCDF}
 \alias{create_netCDF}
-\title{Title}
+\title{Create NetCDF}
 \usage{
 create_netCDF(in_file_path, out_file_path)
 }
 \arguments{
-\item{in_file_path}{}
+\item{in_file_path}{Path to NEXRAD Data file}
 
-\item{out_file_path}{}
+\item{out_file_path}{Path to output file}
 }
 \value{
 
 }
 \description{
-Title
+Create NetCDF
 }

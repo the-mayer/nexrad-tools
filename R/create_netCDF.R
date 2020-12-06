@@ -1,13 +1,12 @@
-#' Title
+#' Create NetCDF
 #'
-#' @param in_file_path 
-#' @param out_file_path 
+#' @param in_file_path Path to NEXRAD Data file
+#' @param out_file_path Path to output file
 #'
 #' @return
 #' @export
 #'
-#' @examples
-#' @importFrom rJava .jaddLibrary .jaddClassPath .jnew
+#' @importFrom rJava .jaddClassPath .jcall .jnew 
 create_netCDF <- function(in_file_path, out_file_path) {
   .jaddClassPath('inst/java/BlockBunzipper.jar')
   .jaddClassPath('inst/java/commons-compress-1.20.jar')
