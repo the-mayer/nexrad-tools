@@ -4,12 +4,12 @@
 \alias{create_netCDF}
 \title{Create NetCDF}
 \usage{
-create_netCDF(in_file_path, out_file_path)
+create_netCDF(in_file, out_file_path)
 }
 \arguments{
-\item{in_file_path}{Path to NEXRAD Data file}
+\item{in_file}{Path to NEXRAD Data file}
 
-\item{out_file_path}{Path to output file}
+\item{out_path}{Path to output directory}
 }
 \value{
 
