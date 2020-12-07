@@ -18,27 +18,24 @@ You can install the development version of this package from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("skydavis435/nexrad-tools")
+devtools::install_github("skydavis435/nexrad-tools", ref = 'pkg')
 ```
 
 # nexrad-tools
 
-A compilation of scripts used to download NEXRAD data from AWS, unpack,
-read, and generate simple plots.
+An R Package used to download NEXRAD data from AWS, write it to netCDF,
+and align NEXRAD moments.
 
 ## download\_nexrad.R
 
-Grab nexrad binary files from AWS by supplying a station and date range
-OR by supplying a list of specific filenames.
+Grab nexrad binary files from AWS by supplying a station and date range.
 
-## unpack\_NEXRAD\_binary.R
+## create\_netCDF.R
 
-utilizing system commands, decompress nexrad data (if compressed) and
-export to netCDF file format utilizing java blob from UCAR.
+Utility, to read and decompress NEXRAD binary data and export to netCDF
+file format utilizing java blob from UCAR.
 
-## merge\_NEXRAD\_moments\_v2.0.R
+## align\_moments.R
 
-extract data from netCDF arrays, melt into data frames and merge nexrad
-resolution cells by azimuth, range, elevation, and time. Additionally,
-calculate Z from dBZ for use in calculating biological reflectivity, per
-Chilson.
+extract data from netCDF arrays, and align NEXRAD moments by azimuth,
+range, and elevation.
