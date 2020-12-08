@@ -2,7 +2,6 @@
 #'
 #' @param in_file Path to NEXRAD Data file
 #'
-#' @return
 #' @export
 #'
 #' @importFrom glue glue

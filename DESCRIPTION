@@ -18,9 +18,13 @@ Imports:
     here,
     lubridate,
     magrittr,
+    ncmeta,
     purrr,
     tibble,
     rlang,
     stringr,
-    R.utils
+    R.utils,
+    readr,
+    tidync,
+    tidyr
 Depends: rJava (>= 0.5-0)

@@ -9,9 +9,6 @@ create_netCDF(in_file)
 \arguments{
 \item{in_file}{Path to NEXRAD Data file}
 }
-\value{
-
-}
 \description{
 Create NetCDF
 }

@@ -11,7 +11,7 @@
 #' @importFrom readr write_csv
 #' @importFrom rlang .data
 #' @importFrom stringr str_detect
-#' @return
+#' @return Data frame with aligned NEXRAD Moments
 #' @export
 #'
 
@@ -20,7 +20,7 @@ align_moments <- function(nc_file, csv_out = NULL) {
   grids_HI <- ncmeta::nc_grids(nc_file) %>% 
     tidyr::unnest(cols = ('variables')) %>% 
     filter(stringr::str_detect(.data$variable, '_HI')) %>% 
-    dplyr::mutate(data = purrr::map(grid,
+    dplyr::mutate(data = purrr::map(.data$grid,
                                     ~nc %>% 
                                       tidync::activate(.x) %>% 
                                       tidync::hyper_tibble()
@@ -52,7 +52,7 @@ align_moments <- function(nc_file, csv_out = NULL) {
                             'scanD_HI' = 'scanV_HI'
                             )
                      ) %>% 
-    dplyr::select(gateD_HI, radialD_HI, scanD_HI, Reflectivity_HI, RadialVelocity_HI, SpectrumWidth_HI, DifferentialReflectivity_HI, CorrelationCoefficient_HI, DifferentialPhase_HI)
+    dplyr::select(.data$gateD_HI, .data$radialD_HI, .data$scanD_HI, .data$Reflectivity_HI, .data$RadialVelocity_HI, .data$SpectrumWidth_HI, .data$DifferentialReflectivity_HI, .data$CorrelationCoefficient_HI, .data$DifferentialPhase_HI)
   
   if(!is.null(csv_out)) {
     aligned_moments %>% 

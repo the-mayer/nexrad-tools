@@ -12,7 +12,7 @@ align_moments(nc_file, csv_out = NULL)
 \item{csv_out}{File path to save output}
 }
 \value{
-
+Data frame with aligned NEXRAD Moments
 }
 \description{
 Align NEXRAD Moments
