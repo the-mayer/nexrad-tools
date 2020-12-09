@@ -6,7 +6,7 @@
 #' @param start_datetime A character vector representing the UTC start time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'
 #' @param end_datetime A character vector representing the UTC end time of the data request. Format: 'YYYY-mm-dd HH:MM:SS'
 #'
-#' @return The filename and location of downloaded NEXRAD files
+#' @return The file name and location of downloaded NEXRAD files
 #' @export
 #' 
 #' @importFrom magrittr %>% 
